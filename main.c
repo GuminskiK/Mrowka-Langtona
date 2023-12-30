@@ -6,6 +6,7 @@
 #include "mrowka.h"
 #include "znaki.h"
 #include "druk.h"
+#include "sterowanie.h"
 
 void wczyt (int argc, char ** argv, mapa * w, mrowka * z); //wczytywanie wartości z argv
 
@@ -23,11 +24,8 @@ int main(int argc, char ** argv){
 	gen_mapa(&w, &g);
 
 	druk_mapa(&w, &z, &g);
-
-	for (int p = 0; p<10; p++){
-		ruch(&z,&w,&g);
-		druk_mapa(&w, &z, &g);
-	}
+	
+	sterowanie(&z, &w, &g);
 }
 
 void wczyt (int argc, char ** argv, mapa * w, mrowka * z){

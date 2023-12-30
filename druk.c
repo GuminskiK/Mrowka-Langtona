@@ -18,7 +18,7 @@ void mrowka_pok(mapa * w, mrowka * z, znak * g){
                                 w->v[z->mp][z->np] = g->AWW;
                                 break;
                 }
-	} else {
+	} else if(w->v[z->mp][z->np] == g->B) {
 
                 switch (z->kierunek){
                         case 'N':
@@ -42,7 +42,7 @@ void mrowka_ukr(mapa * w, mrowka * z, znak * g){
 	if(w->v[z->mp][z->np] == g->AWN ||w->v[z->mp][z->np] == g->AWE || w->v[z->mp][z->np] == g->AWS || w->v[z->mp][z->np] == g->AWW){
 		w->v[z->mp][z->np] = g->W;
 
-	}else{
+	}else if(w->v[z->mp][z->np] == g->ABN ||w->v[z->mp][z->np] == g->ABE || w->v[z->mp][z->np] == g->ABS || w->v[z->mp][z->np] == g->ABW){
 		w->v[z->mp][z->np] = g->B;
 
 	}

@@ -15,7 +15,7 @@ void init_mrowka(int m, int n, int ile, char * kierunek, mrowka * z){
 
 }
 
-void ruch(mrowka * z, mapa * w, znak * g){
+int ruch(mrowka * z, mapa * w, znak * g){
 	
 	if (w->v[z->mp][z->np] == g->W){
 
@@ -65,8 +65,9 @@ void ruch(mrowka * z, mapa * w, znak * g){
                 }
 
 	}else{
-
-		printf("KONIEC");
+		return 1;
 
 	}
+
+	return 0;
 }

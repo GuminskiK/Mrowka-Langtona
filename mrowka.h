@@ -17,6 +17,6 @@ typedef struct{
 } mrowka;
 
 void init_mrowka( int m, int n, int ile, char * kierunek, mrowka * z); //malloc i przypisanie wartości zmiennym ze struktury
-void ruch(mrowka * z, mapa * w, znak * g); //ruch mrówki
+int ruch(mrowka * z, mapa * w, znak * g); //ruch mrówki
 
 #endif

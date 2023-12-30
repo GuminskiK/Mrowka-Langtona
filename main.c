@@ -23,6 +23,11 @@ int main(int argc, char ** argv){
 	gen_mapa(&w, &g);
 
 	druk_mapa(&w, &z, &g);
+
+	for (int p = 0; p<10; p++){
+		ruch(&z,&w,&g);
+		druk_mapa(&w, &z, &g);
+	}
 }
 
 void wczyt (int argc, char ** argv, mapa * w, mrowka * z){

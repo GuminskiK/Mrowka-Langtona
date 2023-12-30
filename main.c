@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
+#include <unistd.h>
 #include "mapa.h"
 #include "mrowka.h"
 #include "znaki.h"
@@ -9,6 +10,7 @@
 #include "sterowanie.h"
 
 void wczyt (int argc, char ** argv, mapa * w, mrowka * z); //wczytywanie wartości z argv
+int flagi (int argc, char ** argv); //wczytywanie flag
 
 int main(int argc, char ** argv){ 
 	
@@ -18,6 +20,7 @@ int main(int argc, char ** argv){
 	
 	init_znaki(&g);
 	wczyt(argc, argv, &w, &z);
+	int f = flagi(argc,argv);
 
 	setlocale(LC_ALL, "C.UTF-8");
 
@@ -38,5 +41,28 @@ void wczyt (int argc, char ** argv, mapa * w, mrowka * z){
         char *kierunek = argc > 5 ? argv[5] : "N";	       //kierunek
 	int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
 	init_mrowka( m, n, ile, kierunek, z);
+
+}
+
+int flagi(int argc, char ** argv){
+	
+	int c; 
+
+	while((c = getopt(argc, argv, "wg")) != 1){
+	
+		switch(c){
+			case 'w':
+				return 1;
+				break;
+			case 'g':
+				return 2;
+				break;
+			case '?':
+				fprintf(stderr, "Nie rozpoznano flagi: %c \n", optopt);
+				break;
+		}
+	}
+
+	return 0;
 
 }

@@ -14,8 +14,13 @@ int main(int argc, char ** argv){
 	mapa w;
 	mrowka z;
 	znak g;
-
+	
+	init_znaki(&g);
 	wczyt(argc, argv, &w, &z);
+
+	setlocale(LC_ALL, "C.UTF-8");
+
+	gen_mapa(&w, &g);
 }
 
 void wczyt (int argc, char ** argv, mapa * w, mrowka * z){

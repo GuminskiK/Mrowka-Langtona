@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <wchar.h>
 #include <locale.h>
+#include <string.h>
 #include "znaki.h"
 
 typedef struct {

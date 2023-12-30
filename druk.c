@@ -48,22 +48,27 @@ void mrowka_ukr(mapa * w, mrowka * z, znak * g){
 	}
 }
 
-void druk_mapa(mapa * w, mrowka * z, znak * g){
+void druk_mapa(mapa * w, mrowka * z, znak * g, int y){
 
 	int i,j;
 
 	mrowka_pok(w,z,g);
+	
+	FILE * druk;
+	char filename[strlen(w->name) + 5];
+	sprintf(filename, "%s.%i", w->name, y);
+
+	druk = fopen(filename,"w");
+	
 
         for(i=0; i<(w->m+2);i++){
-                printf("\n");
+                fprintf(druk,"\n");
                 for(j=0; j<(w->n+2); j++){
 
-                        printf("%ls", w->v[i][j]);
+                       fprintf(druk, "%ls", w->v[i][j]);
 
                 }
         }
 
         mrowka_ukr(w,z,g);
-
-        printf("\n");
 }

@@ -22,8 +22,8 @@ int main(int argc, char ** argv){
 	setlocale(LC_ALL, "C.UTF-8");
 
 	gen_mapa(&w, &g);
-
-	druk_mapa(&w, &z, &g);
+	int y = 0;
+	druk_mapa(&w, &z, &g, y);
 	
 	sterowanie(&z, &w, &g);
 }

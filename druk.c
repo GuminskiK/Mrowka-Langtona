@@ -1,4 +1,4 @@
-#include <druk.h>
+#include "druk.h"
 
 void druk_mapa(mapa * w, mrowka * z, znak * g){
 

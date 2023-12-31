@@ -6,6 +6,7 @@
 #include <wchar.h>
 #include <locale.h>
 #include <string.h>
+#include <time.h>
 #include "znaki.h"
 
 typedef struct {
@@ -21,4 +22,9 @@ void init_mapa(int m, int n, char * name, mapa * w); //malloc i przypisanie wart
 
 void gen_mapa(mapa * w, znak * g); //generowanie mapy
 
+void gen_rand(mapa * w, znak * g, int z);
+
+void czyt_mapa(FILE * W, mapa *w, znak * g, char * name);
+
+void los(int k, int * ml, int * nl, mapa * w);
 #endif

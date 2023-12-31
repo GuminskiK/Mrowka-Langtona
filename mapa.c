@@ -51,3 +51,34 @@ void gen_mapa(mapa * w, znak * g){
 		}
 	}
 }
+
+void gen_rand(mapa * w, znak * g, int z){
+	
+	srand(time(NULL)); //ziarno losowości zależne od czasu
+        int k = w->m * w->n; // ile mamy pól
+	int p = (z * k) / 100;//ile pól malujemy 
+	int ml,nl;
+        for(int i = 0; i< p; i++){
+                
+                los(k, &ml, &nl, w);
+		while( w->v[ml][nl] != g->W){
+			los(k, &ml, &nl, w);
+		}
+                w->v[ml][nl] = g->B;    
+        }
+}
+
+void los(int k, int * ml, int * nl, mapa * w){
+	
+	int randomNumber = rand() % k + 1;
+        if (randomNumber % w->n == 0){
+                *ml = (randomNumber / w->n);
+		*nl = w->n;
+        }else{
+        	*ml = (randomNumber / w->n)+1;
+		*nl = (randomNumber % w->n);
+        }
+
+}
+
+void czyt_mapa(FILE * W, mapa *w, znak * g, char * name){}

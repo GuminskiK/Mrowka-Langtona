@@ -10,7 +10,7 @@
 #include "druk.h"
 #include "sterowanie.h"
 
-void wczyt (int argc, char ** argv, mapa * w, mrowka * z); //wczytywanie wartości z argv
+void wczyt (int argc, char ** argv, mapa * w, mrowka * z, znak * g); //wczytywanie wartości z argv
 int flagi (int argc, char ** argv); //wczytywanie flag
 
 int main(int argc, char ** argv){ 
@@ -20,28 +20,51 @@ int main(int argc, char ** argv){
 	znak g;
 	
 	init_znaki(&g);
-	int f = flagi (argc, argv);
-	wczyt(argc, argv, &w, &z);
+	wczyt(argc, argv, &w, &z, &g);
 	setlocale(LC_ALL, "C.UTF-8");
 
-	gen_mapa(&w, &g);
 	int y = 0;
 	druk_mapa(&w, &z, &g, y);
 	
 	sterowanie(&z, &w, &g);
 }
 
-void wczyt (int argc, char ** argv, mapa * w, mrowka * z){
+void wczyt (int argc, char ** argv, mapa * w, mrowka * z, znak * g){
+	
+	int f = flagi (argc, argv);
 
-	int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
-        int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
-        char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
-	init_mapa( m, n, name, w);
+	if(f == 0){
+                
+                int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
+                int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
+                char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
+                init_mapa( m, n, name, w);
 
-        char *kierunek = argc > 5 ? argv[5] : "N";	       //kierunek
-	int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
-	init_mrowka( m, n, ile, kierunek, z);
+                char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
+                int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
+                init_mrowka( m, n, ile, kierunek, z);
+                gen_mapa(w, g);
 
+        } else if (f == 1){
+
+                FILE * W = argc > 1 ? fopen(argv[1], "r") : stdin;
+                char *name = argc > 2 ? argv[2] : "ML";
+                czyt_mapa(W,w,g,name);
+
+        } else if (f == 2){
+
+                int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
+                int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
+                char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
+                init_mapa( m, n, name, w);
+
+                char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
+                int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
+                init_mrowka( m, n, ile, kierunek, z);
+                int z = argc > 6 ? atoi(argv[6]): 10;                  //jaki procent
+                gen_mapa(w,g);
+                gen_rand(w, g, z);
+        }
 }
 
 int flagi (int argc, char ** argv){

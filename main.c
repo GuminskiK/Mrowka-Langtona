@@ -3,6 +3,7 @@
 #include <wchar.h>
 #include <locale.h>
 #include <unistd.h>
+#include <ctype.h>
 #include "mapa.h"
 #include "mrowka.h"
 #include "znaki.h"
@@ -19,9 +20,8 @@ int main(int argc, char ** argv){
 	znak g;
 	
 	init_znaki(&g);
+	int f = flagi (argc, argv);
 	wczyt(argc, argv, &w, &z);
-	int f = flagi(argc,argv);
-
 	setlocale(LC_ALL, "C.UTF-8");
 
 	gen_mapa(&w, &g);
@@ -44,22 +44,25 @@ void wczyt (int argc, char ** argv, mapa * w, mrowka * z){
 
 }
 
-int flagi(int argc, char ** argv){
-	
-	int c; 
+int flagi (int argc, char ** argv){
 
-	while((c = getopt(argc, argv, "wg")) != 1){
-	
-		switch(c){
+	int c;
+
+	while ((c = getopt (argc, argv, "wg")) != -1){
+		
+		switch (c){
+		
 			case 'w':
-				return 1;
-				break;
+    				return 1;
+    				break;
 			case 'g':
-				return 2;
-				break;
+    				return 2;
+    				break;
 			case '?':
-				fprintf(stderr, "Nie rozpoznano flagi: %c \n", optopt);
-				break;
+    				fprintf (stderr, "Nieznana opcja `-%c'.\n", optopt);
+    				return 0;
+			default:
+    				abort ();
 		}
 	}
 

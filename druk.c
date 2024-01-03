@@ -56,7 +56,7 @@ void druk_mapa(mapa * w, mrowka * z, znak * g, int y){
 	
 	FILE * druk;
 	char filename[strlen(w->name) + 5];
-	sprintf(filename, "%s.%i", w->name, y);
+	sprintf(filename, "%s_%i", w->name, y);
 
 	druk = fopen(filename,"w");
 	

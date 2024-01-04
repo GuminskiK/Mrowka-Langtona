@@ -4,6 +4,6 @@
 #include "mrowka.h"
 #include "znaki.h"
 
-void sterowanie(mrowka * z, mapa * w, znak * g); //sterowanie ruchem mrowki i drukowaniem
+void sterowanie(mrowka_t * z, mapa_t * w, znak_t * g); //sterowanie ruchem mrowki i drukowaniem
 
 #endif

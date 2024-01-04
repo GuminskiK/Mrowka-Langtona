@@ -10,61 +10,61 @@
 #include "druk.h"
 #include "sterowanie.h"
 
-void wczyt (int argc, char ** argv, mapa * w, mrowka * z, znak * g); //wczytywanie wartości z argv
+void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * znak); //wczytywanie wartości z argv
 int flagi (int argc, char ** argv); //wczytywanie flag
 
 int main(int argc, char ** argv){ 
 	
-	mapa w;
-	mrowka z;
-	znak g;
+	mapa_t mapa;
+	mrowka_t mrowka;
+	znak_t znak;
 	
-	init_znaki(&g);
-	wczyt(argc, argv, &w, &z, &g);
+	init_znaki(&znak);
+	wczyt(argc, argv, &mapa, &mrowka, &znak);
 	setlocale(LC_ALL, "C.UTF-8");
 
 	int y = 0;
-	druk_mapa(&w, &z, &g, y);
+	druk_mapa(&mapa, &mrowka, &znak, y);
 	
-	sterowanie(&z, &w, &g);
+	sterowanie(&mrowka, &mapa, &znak);
 }
 
-void wczyt (int argc, char ** argv, mapa * w, mrowka * z, znak * g){
+void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * znak){
 	
 	int f = flagi (argc, argv);
 
 	if(f == 0){
                 
-                int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
-                int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
-                char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
-                init_mapa( m, n, name, w);
+        int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
+        int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
+        char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
+        init_mapa(m, n, name, mapa);
 
-                char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
-                int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
-                init_mrowka( m, n, ile, kierunek, z);
-                gen_mapa(w, g);
+        char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
+        int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
+        init_mrowka(m, n, ile, kierunek, mrowka);
+        gen_mapa(mapa, znak);
 
-        } else if (f == 1){
+    } else if (f == 1){
 
-                FILE * W = argc > 1 ? fopen(argv[1], "r") : stdin;
-                char *name = argc > 2 ? argv[2] : "ML";
-                czyt_mapa(W,w,g,name);
+        FILE * wejscie = argc > 1 ? fopen(argv[1], "r") : stdin;
+        char *nazwa = argc > 2 ? argv[2] : "ML";
+        czyt_mapa(wejscie, mapa, znak, nazwa);
 
-        } else if (f == 2){
+    } else if (f == 2){
 
-                int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
-                int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
-                char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
-                init_mapa( m, n, name, w);
+        int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
+        int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
+        char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
+        init_mapa(m, n, name, mapa);
 
-                char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
-                int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
-                init_mrowka( m, n, ile, kierunek, z);
-                int z = argc > 6 ? atoi(argv[6]): 10;                  //jaki procent
-                gen_mapa(w,g);
-                gen_rand(w, g, z);
-        }
+        char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
+        int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
+        init_mrowka(m, n, ile, kierunek, mrowka);
+        int procent = argc > 6 ? atoi(argv[6]) : 10;                  //jaki procent
+        gen_mapa(mapa, znak);
+        gen_rand(mapa, znak, procent);
+    }
 }
 
 int flagi (int argc, char ** argv){

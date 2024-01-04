@@ -10,13 +10,13 @@
 typedef struct{
 
 	char kierunek; //litera oznaczająca kierunek, w który mrówka jest skierowana
-	int mp; // rząd w którym mrówka się znajduje
-	int np; // kolumna w której mrówka się znajduje
+	int wiersz; // rząd w którym mrówka się znajduje
+	int kolumna; // kolumna w której mrówka się znajduje
 	int ile; //pozostała ilość iteracji
 
-} mrowka;
+} mrowka_t;
 
-void init_mrowka( int m, int n, int ile, char * kierunek, mrowka * z); //malloc i przypisanie wartości zmiennym ze struktury
-int ruch(mrowka * z, mapa * w, znak * g); //ruch mrówki
+void init_mrowka(int wiersze, int kolumny, int ile, char * kierunek, mrowka_t * mrowka); //malloc i przypisanie wartości zmiennym ze struktury
+int ruch(mrowka_t * mrowka, mapa_t * mapa, znak_t * znak); //ruch mrówki
 
 #endif

@@ -1,70 +1,73 @@
 #include "mrowka.h"
 
-void init_mrowka(int m, int n, int ile, char * kierunek, mrowka * z){
+void init_mrowka(int wiersze, int kolumny, int ile, char * kierunek, mrowka_t * mrowka){
 	
 	//z->kierunek = malloc(sizeof(char));
-	z->kierunek = kierunek[0];
+	mrowka->kierunek = kierunek[0];
 
 	//z->mp = malloc(sizeof(int));
-	z->mp = (int)(m/2);
+	mrowka->wiersz = (int)(wiersze / 2);
 
 	//z->np = malloc(sizeof(int));
-	z->np = (int)(n/2);
+	mrowka->kolumna = (int)(kolumny / 2);
 
-	z->ile = ile;
+    mrowka->ile = ile;
 
 }
 
-int ruch(mrowka * z, mapa * w, znak * g){
+int ruch(mrowka_t * mrowka, mapa_t * mapa, znak_t * znak){
 	
-	if (w->v[z->mp][z->np] == g->W){
+	if (mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->W){
 
-		w->v[z->mp][z->np] = g->B;
+        mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->B;
 
-		switch (z->kierunek){
+		switch (mrowka->kierunek){
 			case 'N':
-				z->kierunek = 'E';
-				z->np += 1;
+                mrowka->kierunek = 'E';
+                mrowka->kolumna += 1;
 				break;
 			case 'E':
-				z->kierunek = 'S';
-				z->mp += 1;
+                mrowka->kierunek = 'S';
+                mrowka->wiersz += 1;
 				break;
 			case 'S':
-				z->kierunek = 'W';
-				z->np -= 1;
+                mrowka->kierunek = 'W';
+                mrowka->kolumna -= 1;
 				break;
 			case 'W':
-				z->kierunek = 'N';
-				z->mp -= 1;
+                mrowka->kierunek = 'N';
+                mrowka->wiersz -= 1;
 				break;
 		}
 
 
-	}else if(w->v[z->mp][z->np] == g->B){
+	}
+    else if(mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->B){
 
-		w->v[z->mp][z->np] = g->W;
+        mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->W;
 
-                switch (z->kierunek){
-                        case 'N':
-                                z->kierunek = 'W';
-                                z->np -= 1;
-                                break;
-                        case 'E':
-                                z->kierunek = 'N';
-                                z->mp -= 1;
-                                break;
-                        case 'S':
-                                z->kierunek = 'E';
-                                z->np += 1;
-                                break;
-                        case 'W':
-                                z->kierunek = 'S';
-                                z->mp += 1;
-                                break;
-                }
+        switch (mrowka->kierunek){
+            case 'N':
+                mrowka->kierunek = 'W';
+                mrowka->kolumna -= 1;
+                break;
+            case 'E':
+                mrowka->kierunek = 'N';
+                mrowka->wiersz -= 1;
+                break;
+            case 'S':
+                mrowka->kierunek = 'E';
+                mrowka->kolumna += 1;
+                break;
+            case 'W':
+                mrowka->kierunek = 'S';
+                mrowka->wiersz += 1;
+                break;
+        }
 
-	}else{
+	}
+    else
+    {
 		return 1;
 
 	}

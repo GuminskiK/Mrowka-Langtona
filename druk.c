@@ -1,74 +1,79 @@
 #include "druk.h"
 
-void mrowka_pok(mapa * w, mrowka * z, znak * g){
-
-	if (w->v[z->mp][z->np] == g->W){
-
-                switch (z->kierunek){
-                        case 'N':
-                                w->v[z->mp][z->np] = g->AWN;
-                                break;
-                        case 'E':
-                                w->v[z->mp][z->np] = g->AWE;
-                                break;
-                        case 'S':
-                                w->v[z->mp][z->np] = g->AWS;
-                                break;
-                        case 'W':
-                                w->v[z->mp][z->np] = g->AWW;
-                                break;
-                }
-	} else if(w->v[z->mp][z->np] == g->B) {
-
-                switch (z->kierunek){
-                        case 'N':
-                                w->v[z->mp][z->np] = g->ABN;
-                                break;
-                        case 'E':
-                                w->v[z->mp][z->np] = g->ABE;
-                                break;
-                        case 'S':
-                                w->v[z->mp][z->np] = g->ABS;
-                                break;
-                        case 'W':
-                                w->v[z->mp][z->np] = g->ABW;
-                                break;
-           	}
+void mrowka_pok(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak){
+	if (mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->W){
+        switch (mrowka->kierunek){
+            case 'N':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->AWN;
+                break;
+            case 'E':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->AWE;
+                break;
+            case 'S':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->AWS;
+                break;
+            case 'W':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->AWW;
+                break;
+        }
+	}
+    else if(mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->B) {
+        switch (mrowka->kierunek){
+            case 'N':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->ABN;
+                break;
+            case 'E':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->ABE;
+                break;
+            case 'S':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->ABS;
+                break;
+            case 'W':
+                mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->ABW;
+                break;
+        }
 	}
 }
 
-void mrowka_ukr(mapa * w, mrowka * z, znak * g){
-	
-	if(w->v[z->mp][z->np] == g->AWN ||w->v[z->mp][z->np] == g->AWE || w->v[z->mp][z->np] == g->AWS || w->v[z->mp][z->np] == g->AWW){
-		w->v[z->mp][z->np] = g->W;
+void mrowka_ukr(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak){
+	// Jeśli pole puste
+	if(mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->AWN
+    || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->AWE
+    || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->AWS
+    || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->AWW)
+    {
+        mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->W;
 
-	}else if(w->v[z->mp][z->np] == g->ABN ||w->v[z->mp][z->np] == g->ABE || w->v[z->mp][z->np] == g->ABS || w->v[z->mp][z->np] == g->ABW){
-		w->v[z->mp][z->np] = g->B;
+	}
+    // Jeśli pole białe
+    else if(mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->ABN
+         || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->ABE
+         || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->ABS
+         || mapa->plansza[mrowka->wiersz][mrowka->kolumna] == znak->ABW)
+    {
+        mapa->plansza[mrowka->wiersz][mrowka->kolumna] = znak->B;
 
 	}
 }
 
-void druk_mapa(mapa * w, mrowka * z, znak * g, int y){
+void druk_mapa(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak, int numerKroku){
 
 	int i,j;
 
-	mrowka_pok(w,z,g);
+	mrowka_pok(mapa, mrowka, znak);
 	
 	FILE * druk;
-	char filename[strlen(w->name) + 5];
-	sprintf(filename, "%s_%i", w->name, y);
+	char filename[strlen(mapa->nazwa) + 5];
+	sprintf(filename, "%s_%i", mapa->nazwa, numerKroku);
 
 	druk = fopen(filename,"w");
 	
 
-        for(i=0; i<(w->m+2);i++){
-                fprintf(druk,"\n");
-                for(j=0; j<(w->n+2); j++){
-
-                       fprintf(druk, "%ls", w->v[i][j]);
-
-                }
+    for(i=0; i<(mapa->wiersze + 2); i++){
+        fprintf(druk,"\n");
+        for(j=0; j<(mapa->kolumny + 2); j++){
+            fprintf(druk, "%ls", mapa->plansza[i][j]);
         }
-
-        mrowka_ukr(w,z,g);
+    }
+    mrowka_ukr(mapa, mrowka, znak);
 }

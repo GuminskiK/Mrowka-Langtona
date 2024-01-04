@@ -1,30 +1,30 @@
 #include "znaki.h"
 
-void init_znaki(znak * g){
+void init_znaki(znak_t * znak){
 	
 	//strzałki
-        g->AWN = L"△"; //A-arrow, W-white, N-north
-        g->ABN = L"▲";
+    znak->AWN = L"△"; //A-arrow, W-white, N-north
+    znak->ABN = L"▲";
 
-        g->AWE = L"▷";
-        g->ABE = L"▶";
+    znak->AWE = L"▷";
+    znak->ABE = L"▶";
 
-        g->AWS = L"▽";
-        g->ABS = L"▼";
+    znak->AWS = L"▽";
+    znak->ABS = L"▼";
 
-        g->AWW = L"◁";
-        g->ABW = L"◀";
+    znak->AWW = L"◁";
+    znak->ABW = L"◀";
 
-        //ramka
+    //ramka
 
-        g->LV = L"│"; //L-line, V-vertical
-        g->LH = L"─";
-        g->LUL = L"┌"; //L-line, D-down, R-right
-        g->LUR = L"┐";
-        g->LDL = L"└";
-        g->LDR = L"┘";
+    znak->LV = L"│"; //L-line, V-vertical
+    znak->LH = L"─";
+    znak->LUL = L"┌"; //L-line, D-down, R-right
+    znak->LUR = L"┐";
+    znak->LDL = L"└";
+    znak->LDR = L"┘";
 
-        //pola
-        g->W = L" ";
-        g->B = L"█";
+    //pola
+    znak->W = L" ";
+    znak->B = L"█";
 }

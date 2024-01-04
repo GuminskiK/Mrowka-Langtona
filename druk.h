@@ -5,7 +5,7 @@
 #include "mrowka.h"
 
 
-void druk_mapa(mapa * w, mrowka * z, znak * g, int y); //wydrukowanie mapy
-void mrowka_pok(mapa * w, mrowka * z, znak * g); //umieszczenie odpowiedniej mrówki na mapie
-void mrowka_ukr(mapa * w, mrowka * z, znak * g); //usunięcie mrówki z mapy
+void druk_mapa(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak, int numerKroku); //wydrukowanie mapy
+void mrowka_pok(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak); //umieszczenie odpowiedniej mrówki na mapie
+void mrowka_ukr(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak); //usunięcie mrówki z mapy
 #endif

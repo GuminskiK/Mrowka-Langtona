@@ -70,10 +70,7 @@ void druk_mapa(mapa_t * mapa, mrowka_t * mrowka, znak_t * znak, int numerKroku){
 	
 
     for(i=0; i<(mapa->wiersze + 2); i++){
-        fprintf(druk,"\n");
-        for(j=0; j<(mapa->kolumny + 2); j++){
-            fprintf(druk, "%ls", mapa->plansza[i][j]);
-        }
+        fwprintf(druk, L"%ls\n", mapa->plansza[i]);
     }
     mrowka_ukr(mapa, mrowka, znak);
 }

@@ -11,7 +11,7 @@
 
 typedef struct {
 
-	wchar_t ***plansza; //mapa w postaci dwuwymiarowej tablicy przechowującej znaki, które są same w sobie tablicami
+	wchar_t **plansza; //mapa w postaci dwuwymiarowej tablicy przechowującej znaki, które są same w sobie tablicami
 	int wiersze; //ilość rzędów mapy
 	int kolumny; //ilość kolumn mapy
 	char * nazwa; //początek nazwy pliku wyjściowego

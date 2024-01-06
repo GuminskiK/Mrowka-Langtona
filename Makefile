@@ -12,3 +12,5 @@ clean:
 	rm -f ./*.o
 	rm -f ./*.gch
 	rm -rf ./bin
+
+.PHONY: clean

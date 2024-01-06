@@ -3,6 +3,7 @@ CFLAGS := -ggdb
 BIN_DIR := bin
 
 all: ${BIN_DIR}/mrowka
+clean_build: clean all
 
 ${BIN_DIR}/mrowka: ./*.c ./*.h
 	mkdir -p bin

@@ -21,7 +21,7 @@ int main(int argc, char ** argv){
 	
 	init_znaki(&znak);
 	wczyt(argc, argv, &mapa, &mrowka, &znak);
-	setlocale(LC_ALL, "C.UTF-8");
+	setlocale(LC_ALL, "");
 
 	int y = 0;
 	druk_mapa(&mapa, &mrowka, &znak, y);
@@ -47,9 +47,13 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
 
     } else if (f == 1){
 
-        FILE * wejscie = argc > 1 ? fopen(argv[1], "r") : stdin;
-        char *nazwa = argc > 2 ? argv[2] : "ML";
-        czyt_mapa(wejscie, mapa, znak, nazwa);
+        FILE * plik = argc > 2 ? fopen(argv[2], "r, ccs=UTF-8") : stdin;
+        if(plik == NULL) perror("Nie udało się otworzyć pliku: ");
+
+        char *nazwa = argc > 3 ? argv[3] : "ML";
+        int iloscIteracji = argc > 4 ? atoi(argv[4]) : 10;
+
+        czyt_mapa(plik, mapa, znak, nazwa, iloscIteracji, mrowka);
 
     } else if (f == 2){
 

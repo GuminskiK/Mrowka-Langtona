@@ -1,4 +1,8 @@
 #include "mapa.h"
+#include "mrowka.h"
+#include "znaki.h"
+#include "wchar.h"
+#define MAX_LINIA 500
 
 void init_mapa(int wiersze, int kolumny, char * nazwa, mapa_t * mapa){
 
@@ -80,4 +84,60 @@ void los(int iloscKomorek, int * wiersz, int * kolumna, mapa_t * mapa){
 
 }
 
-void czyt_mapa(FILE * plik, mapa_t *mapa, znak_t * znak, char * nazwa){}
+void znajdzMrowke(wchar_t* linia, znak_t* znaki, int ileIteracji, mrowka_t* mrowka, int wiersz){
+    // Znaki poukladane w kolejnosci NESWNESW
+    wchar_t glowy[8] = {
+            znaki->ABN, znaki->ABE, znaki->ABS, znaki->ABW,  // Przeźroczyste
+            znaki->AWN, znaki->AWE, znaki->AWS, znaki->AWW
+    };
+    char kierunki[4] = {'N', 'E', 'S', 'W'};
+
+    for(int glowaIndex = 0; glowaIndex < 8; glowaIndex++) {
+        wchar_t glowa = glowy[glowaIndex];
+        // Jeżeli znaleziono
+        wchar_t * wskaznikNaMrowke = wcschr(linia, glowa);
+        if (wskaznikNaMrowke != NULL)
+        {
+            int kolumna = wskaznikNaMrowke - linia;
+            char kierunek = kierunki[glowaIndex % 4];
+
+            mrowka->wiersz = wiersz;
+            mrowka->kolumna = kolumna;
+            mrowka->ile = ileIteracji;
+            mrowka->kierunek = kierunek;
+        }
+    }
+
+}
+
+//z pliku może poznać wymiary
+void czyt_mapa(FILE * plik, mapa_t *mapa, znak_t * znak, char * nazwa, int ileIteracji, mrowka_t* mrowka){
+    setlocale(LC_ALL, "");
+
+    wchar_t linia[MAX_LINIA] = L"";
+
+    // Sprawdź długość pierwszej linii (ramki)
+    fgetws(linia, MAX_LINIA, plik);
+
+
+    int iloscKolumn = wcslen(linia) - 3; // bo trzeba usunąć też znak nowej linii
+    int iloscWierszy = 0;
+
+    // Licz wiersze
+    while(fgetws(linia, MAX_LINIA, plik) != NULL) {
+        // wykrywa to dolną ramkę
+        if(wcschr(linia, znak->LV) == NULL) break;
+        iloscWierszy++;
+    }
+    init_mrowka(iloscWierszy, iloscWierszy, ileIteracji, "N", mrowka);
+    init_mapa(iloscWierszy, iloscKolumn, nazwa, mapa);
+
+    // Używam tego aby pominąć wszyskie białe znaki przed ramką
+    rewind(plik);
+    // Zaczynam od indeksu
+    for(int wiersz = 0; wiersz <= iloscWierszy + 1; wiersz++) {
+        fgetws(linia, MAX_LINIA, plik);
+        znajdzMrowke(linia, znak, ileIteracji, mrowka, wiersz);
+        wcsncpy(mapa->plansza[wiersz], linia, iloscKolumn + 2);
+    }
+}

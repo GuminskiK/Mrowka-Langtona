@@ -57,15 +57,15 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
 
     } else if (f == 2){
 
-        int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
-        int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
-        char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
+        int m = argc > 2 ? atoi(argv [2]) : 8;                 //liczba wierszy planszy
+        int n = argc > 3 ? atoi(argv [3]) : 10;                //liczba kolumn planszy
+        char *name = argc > 5 ? argv[5] : "ML";                //przedrostek plikow wynikowych
         init_mapa(m, n, name, mapa);
 
-        char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
-        int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
+        char *kierunek = argc > 6 ? argv[6] : "N";             //kierunek
+        int ile = argc > 4 ? atoi(argv [4]) : 20;              //liczba iteracji
         init_mrowka(m, n, ile, kierunek, mrowka);
-        int procent = argc > 6 ? atoi(argv[6]) : 10;                  //jaki procent
+        int procent = argc > 7 ? atoi(argv[7]) : 10;                  //jaki procent
         gen_mapa(mapa, znak);
         gen_rand(mapa, znak, procent);
     }

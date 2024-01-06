@@ -1,21 +1,20 @@
 #include "mapa.h"
 
-void init_mapa(int m, int n, char * nazwa, mapa_t * mapa){
+void init_mapa(int wiersze, int kolumny, char * nazwa, mapa_t * mapa){
 
 	//w->m = malloc(sizeof(int));
-	mapa->wiersze = m;
+	mapa->wiersze = wiersze;
 
 	//w->n = malloc(sizeof(int));
-	mapa->kolumny = n;
+	mapa->kolumny = kolumny;
 
     mapa->nazwa = malloc(sizeof(char) * strlen(nazwa));
     mapa->nazwa = nazwa;
 
-    mapa->plansza = (wchar_t **)malloc((m + 2) * sizeof (wchar_t*));
+    mapa->plansza = (wchar_t **)malloc((wiersze + 2) * sizeof (wchar_t*));
 
-	for(int i = 0; i< (m+2); i++){
-
-        mapa->plansza[i] = (wchar_t*)malloc((n + 2) * sizeof(wchar_t));
+	for(int i = 0; i< (wiersze + 2); i++){
+        mapa->plansza[i] = (wchar_t*)malloc((kolumny + 2) * sizeof(wchar_t));
 	}
 }
 

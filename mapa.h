@@ -20,6 +20,8 @@ typedef struct {
 
 void init_mapa(int m, int n, char * nazwa, mapa_t * mapa); //malloc i przypisanie wartości zmiennym ze struktury
 
+void init_mapa(int wiersze, int kolumny, char * nazwa, mapa_t * mapa); //malloc i przypisanie wartości zmiennym ze struktury
+
 void gen_mapa(mapa_t * mapa, znak_t * znak); //generowanie mapy
 
 void gen_rand(mapa_t * mapa, znak_t * znak, int procent);

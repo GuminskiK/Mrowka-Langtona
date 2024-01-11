@@ -37,8 +37,10 @@ do
   test_in_dir=$tests_dir/$test_id
 
   args=$(cat "$test_in_dir/args")
+  mkdir -p "$test_dir"
+  shopt -s nullglob
+  cp "$test_in_dir/input" "$test_in_dir/args" "$test_in_dir"/f* "$test_dir/"
 
-  cp -r "$test_in_dir" "$test_dir"
   cp "$mrowka_bin" "$test_dir/mrowka"
 
   cd "$test_dir" || exit 1

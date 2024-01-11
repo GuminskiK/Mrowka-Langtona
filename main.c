@@ -48,7 +48,10 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
     } else if (f == 1){
 
         FILE * plik = argc > 2 ? fopen(argv[2], "r, ccs=UTF-8") : stdin;
-        if(plik == NULL) perror("Nie udało się otworzyć pliku: ");
+        if(plik == NULL) {
+            perror("Nie udało się otworzyć pliku: ");
+            exit(1);
+        }
 
         char *nazwa = argc > 3 ? argv[3] : "ML";
         int iloscIteracji = argc > 4 ? atoi(argv[4]) : 10;

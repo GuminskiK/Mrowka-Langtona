@@ -18,7 +18,8 @@ void init_mapa(int wiersze, int kolumny, char * nazwa, mapa_t * mapa){
     mapa->plansza = (wchar_t **)malloc((wiersze + 2) * sizeof (wchar_t*));
 
 	for(int i = 0; i< (wiersze + 2); i++){
-        mapa->plansza[i] = (wchar_t*)malloc((kolumny + 2) * sizeof(wchar_t));
+        // Należy dodatkowo zaalokować pamięć dla znaku \0
+        mapa->plansza[i] = (wchar_t*)malloc((kolumny + 3) * sizeof(wchar_t));
 	}
 }
 

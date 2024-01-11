@@ -37,11 +37,11 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
                 
         int m = argc > 1 ? atoi(argv [1]) : 8;                 //liczba wierszy planszy
         int n = argc > 2 ? atoi(argv [2]) : 10;                //liczba kolumn planszy
+        int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
         char *name = argc > 4 ? argv[4] : "ML";                //przedrostek plikow wynikowych
         init_mapa(m, n, name, mapa);
 
         char *kierunek = argc > 5 ? argv[5] : "N";             //kierunek
-        int ile = argc > 3 ? atoi(argv [3]) : 20;              //liczba iteracji
         init_mrowka(m, n, ile, kierunek, mrowka);
         gen_mapa(mapa, znak);
 
@@ -53,8 +53,8 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
             exit(1);
         }
 
-        char *nazwa = argc > 3 ? argv[3] : "ML";
-        int iloscIteracji = argc > 4 ? atoi(argv[4]) : 10;
+        int iloscIteracji = argc > 3 ? atoi(argv[3]) : 10;
+        char *nazwa = argc > 4 ? argv[4] : "ML";
 
         czyt_mapa(plik, mapa, znak, nazwa, iloscIteracji, mrowka);
 
@@ -62,11 +62,10 @@ void wczyt (int argc, char ** argv, mapa_t * mapa, mrowka_t * mrowka, znak_t * z
 
         int m = argc > 2 ? atoi(argv [2]) : 8;                 //liczba wierszy planszy
         int n = argc > 3 ? atoi(argv [3]) : 10;                //liczba kolumn planszy
+        int ile = argc > 4 ? atoi(argv [4]) : 20;              //liczba iteracji
         char *name = argc > 5 ? argv[5] : "ML";                //przedrostek plikow wynikowych
         init_mapa(m, n, name, mapa);
-
         char *kierunek = argc > 6 ? argv[6] : "N";             //kierunek
-        int ile = argc > 4 ? atoi(argv [4]) : 20;              //liczba iteracji
         init_mrowka(m, n, ile, kierunek, mrowka);
         int procent = argc > 7 ? atoi(argv[7]) : 10;                  //jaki procent
         gen_mapa(mapa, znak);

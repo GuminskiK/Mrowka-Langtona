@@ -137,7 +137,8 @@ void czyt_mapa(FILE * plik, mapa_t *mapa, znak_t * znak, char * nazwa, int ileIt
     // Zaczynam od indeksu
     for(int wiersz = 0; wiersz <= iloscWierszy + 1; wiersz++) {
         fgetws(linia, MAX_LINIA, plik);
+        linia[iloscKolumn + 2] = '\0';
         znajdzMrowke(linia, znak, ileIteracji, mrowka, wiersz);
-        wcsncpy(mapa->plansza[wiersz], linia, iloscKolumn + 2);
+        wcsncpy(mapa->plansza[wiersz], linia, iloscKolumn + 3);
     }
 }

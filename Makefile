@@ -14,4 +14,6 @@ clean:
 	rm -f ./*.gch
 	rm -rf ./bin
 
-.PHONY: clean
+check: ${BIN_DIR}/mrowka
+	./testuj.sh
+.PHONY: clean test

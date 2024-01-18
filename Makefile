@@ -6,13 +6,13 @@ all: ${BIN_DIR}/mrowka
 clean_build: clean all
 
 ${BIN_DIR}/mrowka: ./*.c ./*.h
-	mkdir -p bin
+	mkdir -p ${BIN_DIR}
 	${CC} ${CFLAGS} $^ -o $@
 
 clean:
 	rm -f ./*.o
 	rm -f ./*.gch
-	rm -rf ./bin
+	rm -rf ${BIN_DIR}
 
 check: ${BIN_DIR}/mrowka
 	./testuj.sh

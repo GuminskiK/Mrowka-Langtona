@@ -113,7 +113,7 @@ void znajdzMrowke(wchar_t* linia, znak_t* znaki, int ileIteracji, mrowka_t* mrow
 
 //z pliku może poznać wymiary
 void czyt_mapa(FILE * plik, mapa_t *mapa, znak_t * znak, char * nazwa, int ileIteracji, mrowka_t* mrowka){
-    setlocale(LC_ALL, "");
+    setlocale(LC_ALL, "C.UTF-8");
 
     wchar_t linia[MAX_LINIA] = L"";
 

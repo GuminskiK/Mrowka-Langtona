@@ -13,6 +13,6 @@ images=()
 for i in $files
 do
   images+=("$tmp/$i.png")
-  convert -background white -fill black -font FreeMono -pointsize 12 -size ${height}x${width} -gravity center label:"$(cat "${dir}/${prefix}_${i}")" "$tmp/$i.png"
+  convert -background white -fill black -font FreeMono -pointsize 12 -size ${width}x${height} -gravity center label:"$(cat "${dir}/${prefix}_${i}")" "$tmp/$i.png"
 done
 convert -delay $delay -loop 0 "${images[@]}" "gif.gif"
